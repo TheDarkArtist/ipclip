@@ -48,6 +48,14 @@ ipclip
 # Your local IP is now in your clipboard. Ctrl+V away.
 ```
 
+**Tip:** Bind it to a keyboard shortcut for instant access. For example in i3/sway:
+
+```
+bindsym $mod+i exec ipclip
+```
+
+Or in GNOME/KDE, add a custom shortcut pointing to `ipclip`.
+
 ## How It Works
 
 Runs `ip route get 1` to find the default route source IP, pipes it through `grep` to extract the address, and sends it to `xclip` to land in your clipboard. One shell command, wrapped in Rust for a clean binary.
