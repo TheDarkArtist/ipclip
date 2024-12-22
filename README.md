@@ -1,98 +1,90 @@
-# Rust IP Address to Clipboard
+<div align="center">
+  <img src="https://www.thedarkartist.in/favicon.ico" width="80" />
+  <h1>ipclip</h1>
+  <p><strong>Copy your local IP address to the clipboard. That's it.</strong></p>
+  <p>
+    <img src="https://img.shields.io/github/languages/top/TheDarkArtist/ipclip?color=0080ff&style=flat-square" alt="Language" />
+    <img src="https://img.shields.io/github/license/TheDarkArtist/ipclip?color=0080ff&style=flat-square" alt="License" />
+    <img src="https://img.shields.io/github/stars/TheDarkArtist/ipclip?color=0080ff&style=flat-square" alt="Stars" />
+  </p>
+</div>
 
-This Rust program retrieves the local IP address and copies it to the clipboard on Linux and Windows systems.
+<br />
 
-## Table of Contents
+## Why ipclip?
 
-- [About](#about)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [Contributing](#contributing)
+Because typing `ip route get 1 | grep -oP 'src \K\S+'` and then manually selecting and copying the output is one too many steps when you do it ten times a day. `ipclip` does it in one command.
 
-## About
+---
 
-This program uses Rust and shell commands to fetch the local IP address and copy it to the clipboard using platform-specific utilities (`xclip` on Linux and `clip.exe` on Windows).
-
-## Features
-
-- Retrieves the local IP address dynamically.
-- Copies the IP address to the clipboard for easy access.
-
-## Requirements
-
-### Linux
-
-- Linux operating system (tested on Ubuntu, Debian, Fedora, and Arch Linux).
-- Rust programming language and Cargo build system.
-- `xclip` utility installed (`sudo apt-get install xclip` on Debian-based systems).
-
-### Windows
-
-- Windows operating system.
-- Rust programming language and Cargo build system.
-- `clip.exe` utility available by default in Windows.
-
-## Getting Started
-
-Follow these instructions to set up and use the project on your Linux or Windows system.
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/IAmKushagraSharma/ipclip.git
-   cd ipclip
-
-2. Ensure Rust is installed. If not, install it using:
-
-    ```bash
-    # Linux
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-    # Windows
-    Visit <https://www.rust-lang.org/tools/install> and follow the instructions.
-
-    ```
-
-3. Install xclip if not already installed:
-
-    - Linux(xclip):
-
-    ```bash
-    sudo apt-get install xclip   # Debian-based
-    sudo dnf install xclip       # Fedora
-    sudo pacman -S xclip         # Arch Linux
-    ```
-
-    - Windows (clip.exe):
-    `clip.exe` is available by default in Windows and does not require additional installation.
-
-4. Build the project:
-
-    ```bash
-    # Linux
-    cargo build --release
-
-    # Windows
-    cargo build --release --target=x86_64-pc-windows-gnu
-    ```
-
-### Usage
-
-Run the compiled executable to copy the local IP address to the clipboard:
+## Install
 
 ```bash
-# Linux
-./target/release/ipclip
+# From source
+git clone https://github.com/TheDarkArtist/ipclip.git
+cd ipclip
+cargo build --release
 
-# Windows
-.\target\release\ipclip.ext
+# Copy to PATH
+sudo cp target/release/ipclip /usr/local/bin/
 ```
 
-### Contributing
+### Requirements
 
-Contributions are welcome! Please fork the repository and submit pull requests. For major changes, open an issue first to discuss potential updates.
+- Linux (uses `ip` command) or Windows (`clip.exe`)
+- `xclip` on Linux (`sudo pacman -S xclip` / `sudo apt install xclip`)
+
+## Usage
+
+```bash
+ipclip
+# => "Local IP address copied to clipboard successfully."
+# Your local IP is now in your clipboard. Ctrl+V away.
+```
+
+## How It Works
+
+Runs `ip route get 1` to find the default route source IP, pipes it through `grep` to extract the address, and sends it to `xclip` to land in your clipboard. One shell command, wrapped in Rust for a clean binary.
+
+## Tech Stack
+
+<p>
+  <img src="https://img.shields.io/badge/Rust-2021_Edition-000?style=flat-square&logo=rust&logoColor=white" />
+</p>
+
+## Contributing
+
+```bash
+git clone https://github.com/TheDarkArtist/ipclip.git
+cd ipclip
+cargo build
+```
+
+<details>
+<summary><strong>Contributing Guidelines</strong></summary>
+
+1. Fork the repo
+2. Create a branch (`git checkout -b feature/my-thing`)
+3. Make your changes
+4. Open a PR
+
+</details>
+
+<details>
+<summary><strong>Contributor Graph</strong></summary>
+<p>
+  <a href="https://github.com/TheDarkArtist/ipclip/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=TheDarkArtist/ipclip" />
+  </a>
+</p>
+</details>
+
+## License
+
+[MIT](LICENSE)
+
+<br />
+
+<div align="center">
+  <sub>Built by <a href="https://thedarkartist.in">TheDarkArtist</a></sub>
+</div>
