@@ -17,6 +17,12 @@ Because typing `ip route get 1 | grep -oP 'src \K\S+'` and then manually selecti
 
 ---
 
+## Demo
+
+<div align="center">
+  <img src="assets/demo.svg" alt="ipclip demo" />
+</div>
+
 ## Install
 
 ```bash
